@@ -11,6 +11,7 @@ import {
   Button,
   Alert,
   Image,
+  ImageBackground,
 } from "react-native";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -57,32 +58,44 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container} onLayout={onLayoutRootView}>
-        <Text style={styles.title}> Hello world</Text>
-        <Image
-          source={{
-            uri: "https://cdn.pixabay.com/photo/2016/11/09/23/16/music-1813100_960_720.png",
-          }}
-          style={styles.img}
-        />
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : "height"}>
-          <TextInput
-            placeholder="Name"
-            value={name}
-            onChangeText={nameHandler}
-            style={styles.input}
-            textContentType="username"
+        <ImageBackground
+          source={require("./assets/images/fon.png")}
+          style={styles.bg}>
+          <Text style={styles.title}> Hello world</Text>
+          {/* <ImageBackground
+            source={require("./assets/images/heart.png")}
+            style={styles.heart}> */}
+          <Image
+            source={{
+              uri: "https://cdn.pixabay.com/photo/2016/11/09/23/16/music-1813100_960_720.png",
+            }}
+            style={styles.img}
           />
-          <TextInput
-            placeholder="Password"
-            value={password}
-            onChangeText={passwordHandler}
-            secureTextEntry={true}
-            style={styles.input}
-            textContentType="password"
-          />
-          <Button title={"Login"} style={styles.input} onPress={onLogin} />
-        </KeyboardAvoidingView>
+          {/* </ImageBackground> */}
+          <View>
+            <KeyboardAvoidingView
+              behavior={Platform.OS == "ios" ? "padding" : "height"}>
+              <TextInput
+                placeholder="Name"
+                value={name}
+                onChangeText={nameHandler}
+                style={styles.input}
+                textContentType="username"
+                textAlign="center"
+              />
+              <TextInput
+                placeholder="Password"
+                value={password}
+                onChangeText={passwordHandler}
+                secureTextEntry={true}
+                style={styles.input}
+                textContentType="password"
+                textAlign="center"
+              />
+              <Button title={"Login"} style={styles.input} onPress={onLogin} />
+            </KeyboardAvoidingView>
+          </View>
+        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -99,11 +112,16 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffffff",
       },
     }),
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingBottom: 30,
-    paddingTop: 50,
     fontFamily: "PlayfairDisplay-Regular",
+  },
+  bg: {
+    flex: 1,
+    resizeMode: "contain",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: 50,
+    paddingTop: 50,
+    paddingHorizontal: 20,
   },
   title: {
     marginTop: 16,
@@ -122,16 +140,15 @@ const styles = StyleSheet.create({
     fontFamily: "PlayfairDisplay-Bold",
   },
   img: {
-    width: 192,
-    height: 220,
-    marginBottom: 40,
+    width: 242,
+    height: 270,
+    marginBottom: 5,
   },
   input: {
     fontSize: 16,
     backgroundColor: Platform.OS === "ios" ? "#ffffff" : "#a2d2ff",
     width: 320,
     borderRadius: 16,
-    paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
     color: Platform.OS === "ios" ? "#A531BF" : "#231942",
